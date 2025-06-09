@@ -197,6 +197,10 @@
     left: 0;
   }
 
+  .menuNavigate {
+    margin-bottom: 40px;
+  }
+
   .mainMenu {
     width: 100%;
     height: 100vh;
