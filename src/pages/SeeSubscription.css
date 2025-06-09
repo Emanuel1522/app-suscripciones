@@ -40,8 +40,8 @@
   margin: 0;
   border: solid 2px #323232;
   border-radius: 10px;
-  min-height: 500px;
-  max-width: 795px;
+  height: 500px;
+  width: 800px;
   background-color: #b1b6b2;
 }
 
@@ -77,8 +77,56 @@
   background-color: #ffd0d0;
 }
 
-.subInf {
-  margin: 0 10px;
-  min-width: 120px;
-  text-align: center;
+.subInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex: 1;
+}
+
+.subActions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .subscriptionForm {
+    width: 85vw;
+    height: 30px;
+    margin: 10px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .subscriptionList {
+    height: 400px;
+    width: 85vw;
+    margin: 10px 0;
+    padding: 18px;
+  }
+
+  .subscriptionItem {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .askSubscription {
+    width: 200px;
+  }
+
+  .subInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .subActions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+  }
 }

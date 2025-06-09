@@ -12,21 +12,24 @@ const CreateSubscription = () => {
   function registerSubscription(e) {
     e.preventDefault();
     let idUser = JSON.parse(localStorage.getItem("idUser"));
-
-    let item = {
-      idUser: idUser,
-      name: name,
-      price: price,
-      type: type,
-      date: date,
-    };
-    fetch(apiItem, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(item),
-    }).then(() => {
-      generalAlert("Registro exitoso", "Puede visualizarlo en Suscripciones ", "success")
-    });
+    if (!name || !price || !type || !date) {
+      generalAlert("No se pudo registrar", "Debe rellenar los campos", "error")
+    } else {
+      let item = {
+        idUser: idUser,
+        name: name,
+        price: price,
+        type: type,
+        date: date,
+      };
+      fetch(apiItem, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item),
+      }).then(() => {
+        generalAlert("Registro exitoso", "Puede visualizarlo en Suscripciones ", "success")
+      });
+    }
   }
 
   return (

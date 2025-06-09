@@ -16,8 +16,7 @@ const SeeSubscription = () => {
 
   useEffect(() => {
     getItems();
-   }, []);
-
+  }, []);
 
   let idUser = JSON.parse(localStorage.getItem("idUser"));
 
@@ -29,13 +28,20 @@ const SeeSubscription = () => {
           placeholder="Nombre suscripcion" />
         <button className="searchSubscription" type="submit">Buscar</button>
       </form>
-      <ul className="subscriptionList">
-        {suscripciones
-        .filter((item) => item.idUser === idUser)
-        .map((item) => (
-          <SubscriptionItem key={item.id} item={item} getItems={getItems}/>
-        ))}
-      </ul>
+
+      {suscripciones.filter((item) => item.idUser === idUser).length === 0 ? (
+        <div className="subscriptionList">
+          <p className="noSubscriptionsMessage">No hay suscripciones</p>
+        </div>
+      ) : (
+        <ul className="subscriptionList">
+          {suscripciones
+            .filter((item) => item.idUser === idUser)
+            .map((item) => (
+              <SubscriptionItem key={item.id} item={item} getItems={getItems} />
+            ))}
+        </ul>
+      )}
     </>
   );
 };

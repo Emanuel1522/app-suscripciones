@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { confirmAlert } from "../helpers/functions";
 
 
-const SubscriptionItem = ({ item, getItems}) => {
+const SubscriptionItem = ({ item, getItems }) => {
   let navigate = useNavigate();
 
   function deleteSubscription(id) {
@@ -13,16 +13,20 @@ const SubscriptionItem = ({ item, getItems}) => {
   function editSubscription() {
     navigate(`/home/editSubscription/${item.id}`);
   }
-  
+
   return (
-    <li className="subscriptionItem">
-      <p className="subInf">{item.name}</p>
-      <p className="subInf">{item.price}</p>
-      <p className="subInf">{item.type}</p>
-      <p className="subInf">{item.date}</p>
-      <button onClick={editSubscription}>✏️</button>
-      <button onClick={() => deleteSubscription(item.id)} >❌</button>
-    </li>
+    <div className="subscriptionItem">
+      <div className="subInfo">
+        <p>{item.name}</p>
+        <p>{item.price}</p>
+        <p>{item.type}</p>
+        <p>{item.date}</p>
+      </div>
+      <div className="subActions">
+        <button onClick={editSubscription}>✏️</button>
+        <button onClick={() => deleteSubscription(item.id)} >❌</button>
+      </div>
+    </div>
   );
 };
 

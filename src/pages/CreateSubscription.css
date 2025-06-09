@@ -81,3 +81,15 @@
   box-shadow: 0 0 #8c8c8c;
   transform: translate(2px, 2px);
 }
+
+@media (max-width: 768px) {
+  .susbcriptionForm {
+    margin-top: 35px;
+  height: 397px;
+  width: 95vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #b1b6b2;
+}
+}

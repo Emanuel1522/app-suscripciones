@@ -49,9 +49,12 @@ const Login = () => {
         let auth = users.some(
             (user) => user.name == name && user.email == email
         );
+        if (!name || !email || !password) {
+            generalAlert("No se pudo registrar", "Debe rellenar los campos", "error")
+        } else 
         if (auth) {
             generalAlert("No se pudo registrar", "Usuario ya existe en la base de datos", "error")
-        } else {
+        }else {
             let user = {
                 name: name,
                 email: email,
@@ -85,17 +88,17 @@ const Login = () => {
                         <div className="flip-card__front">
                             <div className="title">Iniciar Sesion</div>
                             <form className="flip-card__form" action="">
-                                <input onChange={(e) => setEmail(e.target.value)} className="flip-card__input" name="email" placeholder="Email" type="email" />
-                                <input onChange={(e) => setPassword(e.target.value)} className="flip-card__input" name="password" placeholder="Password" type="password" />
+                                <input onChange={(e) => setEmail(e.target.value).trim} className="flip-card__input" name="email" placeholder="Email" type="email" />
+                                <input onChange={(e) => setPassword(e.target.value).trim} className="flip-card__input" name="password" placeholder="Password" type="password" />
                                 <button onClick={logIn} className="flip-card__btn">Validar</button>
                             </form>
                         </div>
                         <div className="flip-card__back">
                             <div className="title">Registrarse</div>
                             <form className="flip-card__form" action="">
-                                <input onChange={(e) => setName(e.target.value)} className="flip-card__input" placeholder="Name" type="text" />
-                                <input onChange={(e) => setEmail(e.target.value)} className="flip-card__input" name="email" placeholder="Email" type="email" />
-                                <input onChange={(e) => setPassword(e.target.value)} className="flip-card__input" name="password" placeholder="Password" type="password" />
+                                <input onChange={(e) => setName(e.target.value).trim} className="flip-card__input" placeholder="Name" type="text" required/>
+                                <input onChange={(e) => setEmail(e.target.value).trim} className="flip-card__input" name="email" placeholder="Email" type="email" required/>
+                                <input onChange={(e) => setPassword(e.target.value).trim} className="flip-card__input" name="password" placeholder="Password" type="password" required/>
                                 <button onClick={registerUser} className="flip-card__btn">Confirmar</button>
                             </form>
                         </div>
