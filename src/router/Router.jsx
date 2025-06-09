@@ -1,10 +1,10 @@
 import Home from "../Home";
+import EditSubscription from "../pages/EditSubscription";
 import ProtectedRoute from "../components/ProtectedRoute"
 import CreateSubscription from "../pages/CreateSubscription"
 import SeeSubscription from "../pages/SeeSubscription"
 import Login from "../pages/Login";
 import MainContent from "../pages/MainContent";
-import EditSubscription from "../pages/editSubscription";
 
 export let Router = [
     {
@@ -24,8 +24,8 @@ export let Router = [
                 element: <SeeSubscription />
             },
             {
-                path:"editSubscription/:id",
-                element:<EditSubscription />
+                path: "editSubscription/:id",
+                element: <EditSubscription />
             }
         ],
     },
