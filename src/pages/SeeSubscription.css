@@ -30,10 +30,6 @@
     1px 1px 10px rgba(45, 45, 45, 0.6);
 }
 
-.searchSubscription:hover {
-  background-color: #45a049;
-}
-
 .subscriptionList {
   list-style: none;
   padding: 40px;
@@ -111,10 +107,6 @@
   .subscriptionItem {
     flex-direction: row;
     align-items: flex-start;
-  }
-
-  .askSubscription {
-    width: 200px;
   }
 
   .subInfo {
