@@ -1,5 +1,5 @@
 import Content from "./components/Content";
-import SideMenu from "./components/sideMenu";
+import SideMenu from "./components/SideMenu";
 
 const Home = () => {
     return (
