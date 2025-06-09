@@ -4,15 +4,9 @@ import "./SeeSubscription.css"
 let apiItems = "https://api-suscripciones.onrender.com/items";
 
 const SeeSubscription = () => {
-  const [suscripciones, setSuscripciones] = useState([]);
-
-
-  function getItems() {
-    fetch(apiItems)
-      .then(res => res.json())
-      .then(data => setSuscripciones(data))
-      .catch(err => console.error(err))
-  }
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [filteredSubscriptions, setFilteredSubscriptions] = useState([]);
+  const [subscriptionSearched, setSubscriptionSearched] = useState("")
 
   useEffect(() => {
     getItems();
@@ -20,23 +14,53 @@ const SeeSubscription = () => {
 
   let idUser = JSON.parse(localStorage.getItem("idUser"));
 
+  function getItems() {
+    fetch(apiItems)
+      .then((res) => res.json())
+      .then((data) => {
+        setSubscriptions(data);
+        setFilteredSubscriptions(data.filter((subscription) => subscription.idUser === idUser));
+      })
+      .catch(err => console.error(err))
+  }
+
+  function handleSearch(e) {
+    let value = e.target.value;
+    setSubscriptionSearched(value);
+
+    if (value.trim() === "") {
+      const allUserSubscriptions = subscriptions.filter(
+        (subscription) => subscription.idUser === idUser
+      )
+      setFilteredSubscriptions(allUserSubscriptions);
+    } else {
+      let filtered = subscriptions.filter(
+        (subscription) =>
+          subscription.idUser === idUser &&
+          subscription.name.toLowerCase().includes(value.toLowerCase())
+      )
+      setFilteredSubscriptions(filtered)
+    }
+  }
+
+
   return (
     <>
       <form className="subscriptionForm">
         <input
+          value={subscriptionSearched}
+          onChange={handleSearch}
           className="askSubscription"
           placeholder="Nombre suscripcion" />
-        <button className="searchSubscription" type="submit">Buscar</button>
       </form>
 
-      {suscripciones.filter((item) => item.idUser === idUser).length === 0 ? (
+      {filteredSubscriptions.length === 0 ? (
         <div className="subscriptionList">
           <p className="noSubscriptionsMessage">No hay suscripciones</p>
         </div>
       ) : (
         <ul className="subscriptionList">
-          {suscripciones
-            .filter((item) => item.idUser === idUser)
+          {filteredSubscriptions
             .map((item) => (
               <SubscriptionItem key={item.id} item={item} getItems={getItems} />
             ))}
