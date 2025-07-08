@@ -26,9 +26,13 @@ const Login = () => {
 
     function searchUser() {
         let userFounded = users.find(
-            (user) => email == user.email && password == user.password || email == usuarios.email && password == usuarios.password
+            (user) => email == user.email && password == user.password
         );
-        return userFounded;
+        const userLocal = usuarios.find(
+            (user) => email === user.email && password === user.password
+        );
+
+        return userFounded || userLocal;
     }
 
     function logIn(e) {
@@ -52,30 +56,30 @@ const Login = () => {
         );
         if (!name || !email || !password) {
             generalAlert("No se pudo registrar", "Debe rellenar los campos", "error")
-        } else 
-        if (auth) {
-            generalAlert("No se pudo registrar", "Usuario ya existe en la base de datos", "error")
-        }else {
-            let user = {
-                name: name,
-                email: email,
-                password: password,
-            };
-            fetch(apiUser, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(user),
-            })
-            .then((res) => res.json())
-            .then((createdUser) => {
-                let token = tokenGenerator();
-                localStorage.setItem("token", token);
-                localStorage.setItem("user", JSON.stringify(createdUser));
-                localStorage.setItem("idUser", JSON.stringify(createdUser.id));
-                getUsers();
-                redirectAlert(navigate, "Registro exitoso", "/home/main")
-            });
-        }
+        } else
+            if (auth) {
+                generalAlert("No se pudo registrar", "Usuario ya existe en la base de datos", "error")
+            } else {
+                let user = {
+                    name: name,
+                    email: email,
+                    password: password,
+                };
+                fetch(apiUser, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(user),
+                })
+                    .then((res) => res.json())
+                    .then((createdUser) => {
+                        let token = tokenGenerator();
+                        localStorage.setItem("token", token);
+                        localStorage.setItem("user", JSON.stringify(createdUser));
+                        localStorage.setItem("idUser", JSON.stringify(createdUser.id));
+                        getUsers();
+                        redirectAlert(navigate, "Registro exitoso", "/home/main")
+                    });
+            }
     }
 
     return (
@@ -89,17 +93,17 @@ const Login = () => {
                         <div className="flip-card__front">
                             <div className="title">Iniciar Sesion</div>
                             <form className="flip-card__form" action="">
-                                <input onChange={(e) => setEmail(e.target.value).trim} className="flip-card__input" name="email" placeholder="Email" type="email" />
-                                <input onChange={(e) => setPassword(e.target.value).trim} className="flip-card__input" name="password" placeholder="Password" type="password" />
+                                <input onChange={(e) => setEmail(e.target.value.trim())} className="flip-card__input" name="email" placeholder="Email" type="email" />
+                                <input onChange={(e) => setPassword(e.target.value.trim())} className="flip-card__input" name="password" placeholder="Password" type="password" />
                                 <button onClick={logIn} className="flip-card__btn">Validar</button>
                             </form>
                         </div>
                         <div className="flip-card__back">
                             <div className="title">Registrarse</div>
                             <form className="flip-card__form" action="">
-                                <input onChange={(e) => setName(e.target.value).trim} className="flip-card__input" placeholder="Name" type="text" required/>
-                                <input onChange={(e) => setEmail(e.target.value).trim} className="flip-card__input" name="email" placeholder="Email" type="email" required/>
-                                <input onChange={(e) => setPassword(e.target.value).trim} className="flip-card__input" name="password" placeholder="Password" type="password" required/>
+                                <input onChange={(e) => setName(e.target.value.trim())} className="flip-card__input" placeholder="Name" type="text" required />
+                                <input onChange={(e) => setEmail(e.target.value.trim())} className="flip-card__input" name="email" placeholder="Email" type="email" required />
+                                <input onChange={(e) => setPassword(e.target.value.trim())} className="flip-card__input" name="password" placeholder="Password" type="password" required />
                                 <button onClick={registerUser} className="flip-card__btn">Confirmar</button>
                             </form>
                         </div>
