@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { tokenGenerator, generalAlert, redirectAlert } from "../helpers/functions.js"
 import { useState, useEffect } from "react";
+import { usuarios } from "../services/database.js"
 import "./Login.css"
 let apiUser = "https://api-suscripciones.onrender.com/users";
 
@@ -25,7 +26,7 @@ const Login = () => {
 
     function searchUser() {
         let userFounded = users.find(
-            (user) => email == user.email && password == user.password
+            (user) => email == user.email && password == user.password || email == usuarios.email && password == usuarios.password
         );
         return userFounded;
     }
